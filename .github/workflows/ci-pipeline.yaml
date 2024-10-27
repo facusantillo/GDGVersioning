@@ -73,4 +73,3 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag ${{ steps.gitversion.outputs.semver }}
           git push https://${GITHUB_TOKEN}@github.com/${{ github.repository }} ${{ steps.gitversion.outputs.semver }}
-
