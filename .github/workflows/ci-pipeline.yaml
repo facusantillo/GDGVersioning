@@ -6,8 +6,7 @@ on:
       - main
       - release/*
   push:
-    branches:
-      - main
+    branches-ignore:
       - release/*
   workflow_dispatch:
 
