@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - release/*
+
   push:
     branches:
       - main
@@ -12,8 +13,10 @@ on:
 
   create:
     branches-ignore:
-          - '*'
-      
+      - '*'
+    tags-ignore:
+      - '*'
+
   workflow_dispatch:
 
 jobs:
