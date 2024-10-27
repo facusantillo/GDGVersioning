@@ -12,7 +12,7 @@ on:
 
   create:
     branches-ignore:
-      - release/*
+          - '*'
       
   workflow_dispatch:
 
