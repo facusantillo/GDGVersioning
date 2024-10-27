@@ -17,13 +17,13 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3.0.0
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Fetch all history to get full git version details
 
       # Install GitVersion tool
       - name: Install GitVersion
-        uses: gittools/actions/setup@v3.0.0
+        uses: gittools/actions/setup@v1
         with:
           versionSpec: ${{ env.GitToolVersion }}
           includePrerelease: true
@@ -31,7 +31,7 @@ jobs:
       # Run GitVersion
       - name: Execute GitVersion
         id: gitversion # GitHub Actions ID for future reference
-        uses: gittools/actions/execute@v3.0.0
+        uses: gittools/actions/execute@v1
         with:
           useConfigFile: true
           configFilePath: "GitVersion.yml"
