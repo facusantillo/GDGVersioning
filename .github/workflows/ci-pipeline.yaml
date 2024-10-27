@@ -15,7 +15,7 @@ on:
 
 jobs:
   setup:
-    if: github.event.before != '0000000000000000000000000000000000000000'
+    if: github.event_name == 'pull_request' || github.event.before != '0000000000000000000000000000000000000000'
     name: setup
     runs-on: ubuntu-latest
 
@@ -46,16 +46,6 @@ jobs:
       
       # Set the build number based on GitVersion and PR number
       - name: Set Build Number
-        if: github.event_name == 'pull_request'
-        run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          VERSION="${{ steps.gitversion.outputs.semver }}"
-          echo "Build number: $VERSION"
-          echo "GITHUB_RUN_NUMBER=$VERSION" >> $GITHUB_ENV
-
-      # Set the build number based on GitVersion (release|main)
-      - name: Set Build Number for Main|Release
-        if: github.event_name != 'pull_request'
         run: |
           VERSION="${{ steps.gitversion.outputs.semver }}"
           echo "Build number: $VERSION"
