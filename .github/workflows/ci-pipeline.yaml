@@ -41,7 +41,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }}
-          VERSION="${{ steps.gitversion.outputs.semver }}-pr${PR_NUMBER}"
+          VERSION="${{ steps.gitversion.outputs.semver }}"
           echo "Build number: $VERSION"
           echo "GITHUB_RUN_NUMBER=$VERSION" >> $GITHUB_ENV
 
