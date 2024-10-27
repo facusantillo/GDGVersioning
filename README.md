@@ -1,1 +1,3 @@
 # GDGVersioning
+
+Fix readme
