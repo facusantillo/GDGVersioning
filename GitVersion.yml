@@ -46,7 +46,7 @@ branches:
     prevent-increment:
       of-merged-branch: true
       when-current-commit-tagged: false
-    track-merge-target: true
+    track-merge-target: false
     regex: ^releas(e|es)?[/-]
     source-branches: []
     is-source-branch-for: []
@@ -108,8 +108,6 @@ branches:
     track-merge-target: true
     regex: ^hotfix(es)?[/-]
     source-branches:
-    - main
-    - develop
     - release
     is-source-branch-for: []
     tracks-release-branches: false
