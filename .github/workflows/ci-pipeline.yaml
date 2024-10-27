@@ -15,6 +15,7 @@ on:
 
 jobs:
   setup:
+    if: github.event.before != '0000000000000000000000000000000000000000'
     name: setup
     runs-on: ubuntu-latest
 
