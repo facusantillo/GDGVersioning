@@ -1,0 +1,58 @@
+name: CI Pipeline
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - release/*
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    env:
+      GitToolVersion: 6.0.3
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history to get full git version details
+
+      # Install GitVersion tool
+      - name: Install GitVersion
+        uses: gittools/actions/setup@v0
+        with:
+          versionSpec: ${{ env.GitToolVersion }}
+          includePrerelease: true
+
+      # Run GitVersion
+      - name: Execute GitVersion
+        id: gitversion # GitHub Actions ID for future reference
+        uses: gittools/actions/execute@v0
+        with:
+          useConfigFile: true
+          configFilePath: "GitVersion.yml"
+      
+      # Set the build number based on GitVersion
+      - name: Set Build Number
+        run: |
+          echo "Build number: ${{ steps.gitversion.outputs.semver }}"
+          echo "GITHUB_RUN_NUMBER=${{ steps.gitversion.outputs.semver }}" >> $GITHUB_ENV
+
+      # Set GitVersion variables for later use
+      - name: Set GitVersion variables
+        run: |
+          echo "SemVer=${{ steps.gitversion.outputs.semver }}" >> $GITHUB_ENV
+          echo "MajorMinorPatch=${{ steps.gitversion.outputs.majorminorpatch }}" >> $GITHUB_ENV
+
+      # Tag the repository (only for main or release branches, not pull requests)
+      - name: Tag repo
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/'))
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.gitversion.outputs.semver }}
+          git push origin ${{ steps.gitversion.outputs.semver }}
