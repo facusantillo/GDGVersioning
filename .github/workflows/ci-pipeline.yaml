@@ -23,7 +23,7 @@ jobs:
 
       # Install GitVersion tool
       - name: Install GitVersion
-        uses: gittools/actions/setup@v0
+        uses: gittools/actions/setup@v3
         with:
           versionSpec: ${{ env.GitToolVersion }}
           includePrerelease: true
@@ -31,7 +31,7 @@ jobs:
       # Run GitVersion
       - name: Execute GitVersion
         id: gitversion # GitHub Actions ID for future reference
-        uses: gittools/actions/execute@v0
+        uses: gittools/actions/execute@v3
         with:
           useConfigFile: true
           configFilePath: "GitVersion.yml"
