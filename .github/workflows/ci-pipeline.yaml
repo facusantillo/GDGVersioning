@@ -13,9 +13,9 @@ on:
 
   create:
     branches-ignore:
-      - '*'
+      - '**'
     tags-ignore:
-      - '*'
+      - '**'
 
   workflow_dispatch:
 
