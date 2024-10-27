@@ -49,7 +49,8 @@ branches:
     track-merge-target: true
     regex: ^releas(e|es)?[/-]
     source-branches: []
-    is-source-branch-for: []
+    is-source-branch-for: 
+     - hotfix
     tracks-release-branches: false
     is-release-branch: true
     is-main-branch: false
@@ -108,8 +109,6 @@ branches:
     track-merge-target: true
     regex: ^hotfix(es)?[/-]
     source-branches:
-    - main
-    - develop
     - release
     is-source-branch-for: []
     tracks-release-branches: false
