@@ -3,3 +3,5 @@
 Fix readme
 
 Automatic versioning example with GitVersion
+
+Test
